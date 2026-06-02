@@ -4,82 +4,187 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flight Recommendations — United AI</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --blue: #003580; --blue-mid: #1a5fab; --blue-light: #e8f2fa;
-    --gold: #c8922a; --gold-light: #f5e6c8;
-    --text: #0f1e34; --text-secondary: #4a5568; --text-muted: #8a9ab0;
-    --border: #d1dcea; --bg: #f5f7fa; --white: #ffffff;
-    --green: #1e6e3e; --green-light: #e6f4ec; --amber: #7a5010;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
+    /* Exact pixel-matched color palette from your companion modules */
+    --site-bg: #02133e;
+    --card-bg: #001C42;
+    --input-bg: #00122C;
+    --accent: #00B2E2; /* United Cyan */
+    --border: #1A365D;
+    
+    --text-main: #FFFFFF;
+    --text-secondary: #A0B2C6;
+    --text-muted: #647B95;
 
-  header { background: var(--blue); padding: 0 40px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+    /* Semantic validation colors tweaked slightly to look incredible against dark backgrounds */
+    --green: #00CC66; 
+    --green-light: rgba(0, 204, 102, 0.15);
+    --amber: #FFB300; 
+    --gold-light: rgba(255, 179, 0, 0.15);
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body { 
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+    background: var(--site-bg); 
+    color: var(--text-main); 
+    font-size: 14px; 
+    line-height: 1.5; 
+  }
+
+  /* Header customized to match the previous form styles perfectly */
+  header { 
+    background: var(--card-bg); 
+    padding: 0 40px; 
+    height: 56px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    border-bottom: 1px solid var(--border);
+  }
   .logo { display: flex; align-items: center; gap: 10px; }
-  .logo-mark { width: 28px; height: 28px; border: 1.5px solid var(--gold); border-radius: 50%; position: relative; overflow: hidden; }
-  .logo-mark::before { content:''; position:absolute; width:100%; height:1px; background:var(--gold); top:50%; }
-  .logo-mark::after  { content:''; position:absolute; height:100%; width:1px; background:var(--gold); left:50%; }
-  .logo-text { font-size: 15px; font-weight: 600; color: white; }
-  .logo-text span { color: var(--gold); }
-  .back-btn { font-size: 13px; color: rgba(255,255,255,0.7); text-decoration: none; border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 5px; }
-  .back-btn:hover { color: white; background: rgba(255,255,255,0.08); }
+  .logo-mark { width: 28px; height: 28px; border: 1.5px solid var(--accent); border-radius: 50%; position: relative; overflow: hidden; }
+  .logo-mark::before { content:''; position:absolute; width:100%; height:1px; background:var(--accent); top:50%; }
+  .logo-mark::after  { content:''; position:absolute; height:100%; width:1px; background:var(--accent); left:50%; }
+  .logo-text { font-size: 15px; font-weight: 700; color: white; letter-spacing: -0.2px; text-transform: uppercase; }
+  .logo-text span { color: var(--accent); }
+  
+  .back-btn { 
+    font-size: 12px; 
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-main); 
+    text-decoration: none; 
+    border: 1px solid var(--border); 
+    padding: 8px 16px; 
+    border-radius: 4px; 
+    background: var(--input-bg);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .back-btn:hover { border-color: var(--accent); background: var(--card-bg); }
 
   .page { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
-  .page-title { font-size: 22px; font-weight: 600; letter-spacing: -0.4px; margin-bottom: 4px; }
-  .page-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 28px; }
+  .page-title { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .page-sub { font-size: 14px; color: var(--text-secondary); margin-bottom: 28px; }
 
-  .intro-bar { font-size: 13px; color: var(--text-secondary); padding: 12px 14px; background: var(--blue-light); border-left: 3px solid var(--blue-mid); border-radius: 0 6px 6px 0; margin-bottom: 24px; line-height: 1.6; }
+  /* Notification banner styled with your distinctive left-border accent look */
+  .intro-bar { 
+    font-size: 13px; 
+    color: var(--text-secondary); 
+    padding: 14px; 
+    background: var(--input-bg); 
+    border-left: 4px solid var(--accent); 
+    border-radius: 0 4px 4px 0; 
+    margin-bottom: 24px; 
+    line-height: 1.6; 
+  }
 
   .flight-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 24px; }
-  @media (max-width: 680px) { .flight-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 768px) { .flight-grid { grid-template-columns: 1fr; } }
 
-  .fcard { background: white; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-  .fcard.risky    { border-top: 3px solid var(--gold); }
-  .fcard.balanced { border-top: 3px solid var(--blue-mid); }
-  .fcard.safe     { border-top: 3px solid var(--green); }
+  /* Premium Flight Cards matching your corporate panel theme */
+  .fcard { 
+    background: var(--card-bg); 
+    border: 1px solid var(--border); 
+    border-radius: 2px; 
+    overflow: hidden; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+  }
+  .fcard.risky    { border-top: 4px solid var(--amber); }
+  .fcard.balanced { border-top: 4px solid var(--accent); }
+  .fcard.safe     { border-top: 4px solid var(--green); }
 
-  .fcard-head { padding: 14px 16px 12px; border-bottom: 1px solid var(--border); }
-  .fcard-badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.7px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+  .fcard-head { padding: 16px; border-bottom: 1px solid var(--border); }
+  .fcard-badge { 
+    display: inline-block; 
+    font-size: 10px; 
+    font-weight: 700; 
+    letter-spacing: 1px; 
+    text-transform: uppercase; 
+    padding: 3px 8px; 
+    border-radius: 3px; 
+    margin-bottom: 10px; 
+  }
   .risky    .fcard-badge { background: var(--gold-light);  color: var(--amber); }
-  .balanced .fcard-badge { background: var(--blue-light);  color: var(--blue-mid); }
+  .balanced .fcard-badge { background: rgba(0, 178, 226, 0.15);  color: var(--accent); }
   .safe     .fcard-badge { background: var(--green-light); color: var(--green); }
-  .fcard-num { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
+  .fcard-num { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
   .fcard-aircraft { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
-  .fcard-times { padding: 14px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border); }
+  .fcard-times { padding: 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border); background: rgba(0, 18, 44, 0.2); }
   .ftime-block { flex: 1; }
-  .ftime { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
-  .fairport { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
-  .fdur { text-align: center; font-size: 11px; color: var(--text-muted); }
+  .ftime { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+  .fairport { font-size: 11px; color: var(--text-muted); margin-top: 1px; font-weight: bold; }
+  .fdur { text-align: center; font-size: 11px; color: var(--text-muted); min-width: 50px; }
   .fdur-line { height: 1px; background: var(--border); width: 36px; margin: 3px auto; }
 
-  .fcard-facts { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; }
-  .fact { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; font-size: 12px; }
+  .fcard-facts { padding: 16px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
+  .fact { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; font-size: 13px; }
   .fact-label { color: var(--text-secondary); flex-shrink: 0; }
-  .fact-val { font-weight: 500; text-align: right; }
+  .fact-val { font-weight: 600; text-align: right; }
   .fv-green { color: var(--green); }
   .fv-amber { color: var(--amber); }
-  .fv-blue  { color: var(--blue-mid); }
-  .risk-note { font-size: 11px; color: var(--amber); background: var(--gold-light); padding: 6px 9px; border-radius: 5px; margin-top: 2px; line-height: 1.5; }
+  .fv-blue  { color: var(--accent); }
+  
+  .risk-note { 
+    font-size: 12px; 
+    color: var(--amber); 
+    background: var(--gold-light); 
+    padding: 10px; 
+    border-radius: 4px; 
+    margin-top: 4px; 
+    line-height: 1.5; 
+    border-left: 2px solid var(--amber);
+  }
 
-  .fcard-foot { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
-  .fcard-price { font-size: 16px; font-weight: 600; }
-  .fcard-conf { font-size: 11px; color: var(--text-muted); }
+  .fcard-foot { padding: 16px; display: flex; align-items: center; justify-content: space-between; background: rgba(0, 18, 44, 0.2); }
+  .fcard-price { font-size: 18px; font-weight: 700; color: #FFFFFF; }
+  .fcard-conf { font-size: 11px; color: var(--text-secondary); }
 
-  .book-link { display: block; margin: 0 16px 14px; padding: 9px; text-align: center; border-radius: 6px; border: 1px solid; font-size: 13px; font-weight: 500; text-decoration: none; }
-  .risky    .book-link { border-color: var(--gold);     color: var(--amber); }
-  .risky    .book-link:hover { background: var(--gold-light); }
-  .balanced .book-link { border-color: var(--blue-mid); color: var(--blue-mid); }
-  .balanced .book-link:hover { background: var(--blue-light); }
-  .safe     .book-link { border-color: var(--green);    color: var(--green); }
-  .safe     .book-link:hover { background: var(--green-light); }
+  /* Standardizing interactive action links to look like custom action buttons */
+  .book-link { 
+    display: block; 
+    margin: 0 16px 16px; 
+    padding: 12px; 
+    text-align: center; 
+    border-radius: 4px; 
+    font-size: 13px; 
+    font-weight: 700; 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none; 
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .risky    .book-link { background: transparent; border: 1px solid var(--amber); color: var(--amber); }
+  .risky    .book-link:hover { background: var(--amber); color: var(--card-bg); }
+  .balanced .book-link { background: var(--accent); border: 1px solid var(--accent); color: var(--card-bg); }
+  .balanced .book-link:hover { background: #FFFFFF; border-color: #FFFFFF; }
+  .safe     .book-link { background: transparent; border: 1px solid var(--green); color: var(--green); }
+  .safe     .book-link:hover { background: var(--green); color: var(--card-bg); }
 
-  .reasoning { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; }
-  .reasoning-label { font-size: 11px; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
-  .reasoning p { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
-  .reasoning strong { color: var(--text); font-weight: 500; }
+  /* Bottom AI Explainer box */
+  .reasoning { 
+    background: var(--card-bg); 
+    border: 1px solid var(--border); 
+    border-radius: 2px; 
+    padding: 24px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+  .reasoning-label { 
+    font-size: 11px; 
+    font-weight: 700; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+    color: var(--accent); 
+    margin-bottom: 12px; 
+  }
+  .reasoning p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+  .reasoning strong { color: #FFFFFF; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -93,7 +198,7 @@
 </header>
 
 <div class="page" id="page-content">
-  <p style="color:var(--text-muted);font-size:13px;">Loading recommendations…</p>
+  <p style="color:var(--text-secondary); font-size:14px;">Loading recommendations…</p>
 </div>
 
 <script>
@@ -133,7 +238,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const flights = [
     { type:'risky',    label:'Fastest / Riskiest', num:`UA ${n1}`, aircraft:'B737-800',   dep:'5:55 AM', arr:'7:31 AM', dur:'2h 36m', tsa:tsaFast, tsaC, transit, ot:'74%', otC:'fv-amber', buf:'~14 min', price:'$219', conf:58, note:'Very tight — any delay risks missing the meeting.' },
     { type:'balanced', label:'Best Balance',        num:`UA ${n2}`, aircraft:'A320',       dep:'6:45 AM', arr:'8:22 AM', dur:'2h 37m', tsa:tsaMed,  tsaC, transit, ot:'88%', otC:'fv-green', buf:'~38 min', price:'$259', conf:84, note:null },
-    { type:'safe',     label:'Safest',              num:`UA ${n3}`, aircraft:'B737 MAX 9', dep:'5:10 AM', arr:'6:47 AM', dur:'2h 37m', tsa:tsaFast, tsaC, transit, ot:'91%', otC:'fv-green', buf:'~73 min', price:'$299', conf:95, note:null },
+    { type:'safe',     label:'Safest',               num:`UA ${n3}`, aircraft:'B737 MAX 9', dep:'5:10 AM', arr:'6:47 AM', dur:'2h 37m', tsa:tsaFast, tsaC, transit, ot:'91%', otC:'fv-green', buf:'~73 min', price:'$299', conf:95, note:null },
   ];
 
   const secLabel = hasCLEAR ? 'CLEAR' : hasPrecheck ? 'PreCheck' : 'standard security';
@@ -159,41 +264,3 @@ window.addEventListener('DOMContentLoaded', () => {
             <div class="fairport">${dest}</div>
           </div>
         </div>
-        <div class="fcard-facts">
-          <div class="fact"><span class="fact-label">TSA wait</span><span class="fact-val ${f.tsaC}">${f.tsa}</span></div>
-          <div class="fact"><span class="fact-label">Downtown transit</span><span class="fact-val fv-blue" style="font-size:11px">${f.transit}</span></div>
-          <div class="fact"><span class="fact-label">On-time rate</span><span class="fact-val ${f.otC}">${f.ot}</span></div>
-          <div class="fact"><span class="fact-label">Buffer time</span><span class="fact-val">${f.buf}</span></div>
-          ${f.note ? `<div class="risk-note">${f.note}</div>` : ''}
-        </div>
-        <div class="fcard-foot">
-          <span class="fcard-price">${f.price}</span>
-          <span class="fcard-conf">AI confidence: ${f.conf}%</span>
-        </div>
-        <a class="book-link" href="https://www.united.com" target="_blank">Book on United →</a>
-      </div>`;
-  }).join('');
-
-  document.getElementById('page-content').innerHTML = `
-    <div class="page-title">Recommended flights for ${name}</div>
-    <div class="page-sub">${origin} → ${dest} · ${date}${arrive ? ' · Arrive by ' + arrive : ''}</div>
-    <div class="intro-bar">
-      Showing three options ranked by safety margin. TSA estimates reflect your ${secLabel} access.
-      Transit times are from ${dest} to downtown.
-    </div>
-    <div class="flight-grid">${cards}</div>
-    <div class="reasoning">
-      <div class="reasoning-label">AI reasoning</div>
-      <p>
-        Given ${name}'s${arrive ? ' hard ' + arrive + ' arrival constraint' : ' timing needs'} and ${secLabel},
-        the <strong>Best Balance (UA ${n2})</strong> is the recommended choice — it lands by 8:22 AM, leaving
-        a 38-minute buffer to reach downtown via the ${transitShort} before the meeting.
-        The 5:55 AM departure is technically workable but its 74% on-time rate is a meaningful risk.
-        The 5:10 AM departure gives the most cushion but requires an early wake-up for relatively modest
-        additional benefit given the reliable 6:45 AM schedule.
-      </p>
-    </div>`;
-});
-</script>
-</body>
-</html>
