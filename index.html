@@ -230,9 +230,10 @@ function goToResults() {
     dest:     document.getElementById('destination').value,
     date:     document.getElementById('travel-date').value,
     arrive:   document.getElementById('must-arrive').value,
-    toggles:  Array.from(document.querySelectorAll('.toggle.active')).map(t =>
-                t.childNodes[0]?.textContent?.trim() === '✓' ? t.textContent.replace('✓', '').trim() : '').filter(Boolean).join(',')
+    // UPDATE THIS LINE BELOW:
+    toggles:  Array.from(document.querySelectorAll('.toggle.active')).map(t => t.innerText.replace('✓', '').trim()).filter(Boolean).join(',')
   });
+
   window.location.href = 'results.html?' + params.toString();
 }
 </script>
