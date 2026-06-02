@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>United AI - Connect Experience</title>
+    <style>
+        /* Base styling matching the United digital ecosystem */
+        body {
+            background-color: #f4f6f8;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Card styled after the deep navy text banner */
+        .united-container {
+            background-color: #001C42; 
+            color: #FFFFFF;
+            padding: 40px;
+            border-radius: 2px; /* Clean, sharp corporate lines */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 420px;
+            box-sizing: border-box;
+            border-top: 6px solid #00B2E2; /* Vibrant winglet blue accent */
+        }
+
+        .united-container h2 {
+            margin-top: 0;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .united-container p {
+            font-size: 14px;
+            color: #A0B2C6;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            color: #00B2E2;
+            font-weight: bold;
+        }
+
+        /* Input and Dropdown Styling */
+        .form-group select, 
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #1A365D;
+            background-color: #00122C;
+            color: #FFFFFF;
+            border-radius: 4px;
+            font-size: 15px;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Subtle focus glow using the accent blue */
+        .form-group select:focus, 
+        .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: #00B2E2;
+            box-shadow: 0 0 8px rgba(0, 178, 226, 0.4);
+        }
+
+        /* Dropdown options styling override for dark theme compatibility */
+        .form-group select option {
+            background-color: #001C42;
+            color: #FFFFFF;
+        }
+
+        /* Button styled after United's primary actions */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background-color: #00B2E2;
+            color: #001C42;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #FFFFFF;
+            color: #001C42;
+        }
+    </style>
+</head>
+<body>
+
+<div class="united-container">
+    <h2>Good Leads The Way</h2>
+    <p>Let United AI personalize your upcoming journey. Select your platform and share your handle below.</p>
+    
+    <form action="#" method="POST">
+        <div class="form-group">
+            <label for="platform">Select Platform</label>
+            <select id="platform" name="platform" required>
+                <option value="" disabled selected>Choose a network...</option>
+                <option value="twitter">Twitter / X</option>
+                <option value="instagram">Instagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="tiktok">TikTok</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="handle">Social Media Handle</label>
+            <input type="text" id="handle" name="handle" placeholder="@username" required autocomplete="off">
+        </div>
+        
+        <button type="submit" class="btn-submit">Superpower Your Experience</button>
+    </form>
+</div>
+
+</body>
+</html>
