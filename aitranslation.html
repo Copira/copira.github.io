@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>United Airlines Demo</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#eef4fb}
+header{background:linear-gradient(135deg,#002244,#005DAA);color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.hero{padding:50px;background:linear-gradient(135deg,#005DAA,#6ec1ff);color:white}
+.container{max-width:1100px;margin:auto}
+.card{background:white;margin-top:-30px;padding:20px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.flight{background:#fff;border-left:5px solid #005DAA;padding:15px;margin:12px 0;border-radius:10px}
+button{background:#005DAA;color:white;border:none;padding:10px 14px;border-radius:8px}
+#langBox{padding:10px;border-radius:8px;border:none;width:280px}
+.loading{position:fixed;inset:0;background:white;display:none;justify-content:center;align-items:center;font-size:32px;font-weight:bold;z-index:9999}
+</style>
+</head>
+<body>
+
+<div id="loading" class="loading">Loading Translation...</div>
+
+<header>
+<div><strong>UNITED AIRLINES</strong></div>
+<input id="langBox" placeholder="Type language to translate with AI">
+</header>
+
+<div class="hero">
+<div class="container">
+<h1 id="title"></h1>
+</div>
+</div>
+
+<div class="container">
+<div class="card">
+<h2 id="featured"></h2>
+<div id="flights"></div>
+</div>
+</div>
+
+<script>
+const languages={
+en:{title:"Book Your Next Journey",featured:"Available Flights",duration:"Duration",price:"Price",select:"Select Flight"},
+hi:{title:"अपनी अगली यात्रा बुक करें",featured:"उपलब्ध उड़ानें",duration:"अवधि",price:"कीमत",select:"उड़ान चुनें"},
+braj:{title:"अपनी अगली यात्रा बुक करौ",featured:"उपलब्ध उड़ान",duration:"समय",price:"मूल्य",select:"उड़ान चुनौ"},
+marwari:{title:"आपरी अगली यात्रा बुक करो",featured:"उपलब्ध उड़ानां",duration:"समय",price:"भाव",select:"उड़ान पसंद करो"}
+};
+
+const flights=[
+{num:"UA101",route:"Newark (EWR) → London Heathrow (LHR)",duration:"7h 05m",price:"$599"},
+{num:"UA115",route:"Newark (EWR) → London Heathrow (LHR)",duration:"7h 20m",price:"$649"},
+{num:"UA205",route:"Chicago (ORD) → New Delhi (DEL)",duration:"14h 55m",price:"$829"},
+{num:"UA312",route:"San Francisco (SFO) → New Delhi (DEL)",duration:"15h 40m",price:"$869"},
+{num:"UA450",route:"Washington (IAD) → New Delhi (DEL)",duration:"13h 50m",price:"$819"}
+];
+
+function render(lang){
+ const t=languages[lang] || languages.en;
+ title.textContent=t.title;
+ featured.textContent=t.featured;
+
+ let out="";
+ flights.forEach(f=>{
+  out += `
+  <div class="flight">
+   <h3>${f.num}</h3>
+   <div>${f.route}</div>
+   <div>${t.duration}: ${f.duration}</div>
+   <div>${t.price}: ${f.price}</div>
+   <br>
+   <button>${t.select}</button>
+  </div>`;
+ });
+ document.getElementById("flights").innerHTML=out;
+}
+
+render("en");
+
+langBox.addEventListener("change",e=>{
+ const v=e.target.value.trim().toLowerCase();
+ const mapping={
+   "english":"en",
+   "hindi":"hi",
+   "braj":"braj",
+   "braj hindi":"braj",
+   "marwari":"marwari",
+   "marwari hindi":"marwari"
+ };
+ const lang=mapping[v] || "en";
+ loading.style.display="flex";
+ setTimeout(()=>{
+   loading.style.display="none";
+   render(lang);
+ },3000);
+});
+</script>
+</body>
+</html>
