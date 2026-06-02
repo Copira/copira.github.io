@@ -224,9 +224,9 @@ window.addEventListener('DOMContentLoaded', () => {
   const arrive  = p.get('arrive')  || '';
   const toggles = (p.get('toggles') || '').split(',').map(s => s.trim());
 
-  const hasCLEAR    = toggles.some(t => t.includes('CLEAR'));
-  const hasPrecheck = toggles.some(t => t.includes('Precheck') || t.includes('TSA'));
-  const hasChair    = toggles.some(t => t.includes('Wheelchair'));
+  const hasCLEAR    = toggles.some(t => t.includes('clear'));
+  const hasPrecheck = toggles.some(t => t.includes('precheck') || t.includes('tsa'));
+  const hasChair    = toggles.some(t => t.includes('wheelchair'));
 
   const tsaFast = hasCLEAR ? '3–5 min (CLEAR)' : hasPrecheck ? '7–10 min (PreCheck)' : '22–35 min';
   const tsaMed  = hasCLEAR ? '3–5 min (CLEAR)' : hasPrecheck ? '8–14 min (PreCheck)' : '18–28 min';
