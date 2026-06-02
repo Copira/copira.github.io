@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>United Airlines - File a Complaint</title>
+    <style>
+        /* Exact pixel-match color for the Google Sites background */
+        body {
+            background-color: #02133e; 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Card container color matching the first panel (#001C42) */
+        .united-container {
+            background-color: #001C42; 
+            color: #FFFFFF;
+            padding: 40px;
+            border-radius: 2px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 420px;
+            box-sizing: border-box;
+            border-top: 6px solid #00B2E2; /* United cyan accent */
+        }
+
+        .united-container h2 {
+            margin-top: 0;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .united-container p {
+            font-size: 14px;
+            color: #A0B2C6;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            color: #00B2E2;
+            font-weight: bold;
+        }
+
+        /* Input and Selection Fields Backgrounds (#00122C) */
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group input[type="time"] {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #1A365D;
+            background-color: #00122C;
+            color: #FFFFFF;
+            border-radius: 4px;
+            font-size: 15px;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Standardize native browser picker color schemes for dark backgrounds */
+        .form-group input[type="date"]::-webkit-calendar-picker-indicator,
+        .form-group input[type="time"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #00B2E2;
+            box-shadow: 0 0 8px rgba(0, 178, 226, 0.4);
+        }
+
+        /* Action Button */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background-color: #00B2E2;
+            color: #001C42;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #FFFFFF;
+            color: #001C42;
+        }
+    </style>
+</head>
+<body>
+
+<div class="united-container">
+    <h2>File a complaint</h2>
+    <p>Provide your flight details below to automatically submit your claim directly to customer care.</p>
+    
+    <form action="#" method="POST">
+        <div class="form-group">
+            <label for="flight-number">Flight Number</label>
+            <input type="text" id="flight-number" name="flight-number" placeholder="e.g., UA123" required autocomplete="off">
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="flight-date">Date</label>
+                <input type="date" id="flight-date" name="flight-date" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="flight-time">Time</label>
+                <input type="time" id="flight-time" name="flight-time" required>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn-submit">Go</button>
+    </form>
+</div>
+
+</body>
+</html>
