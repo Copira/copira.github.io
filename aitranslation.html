@@ -1,19 +1,164 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>United Airlines Demo</title>
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#eef4fb}
-header{background:linear-gradient(135deg,#002244,#005DAA);color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
-.hero{padding:50px;background:linear-gradient(135deg,#005DAA,#6ec1ff);color:white}
-.container{max-width:1100px;margin:auto}
-.card{background:white;margin-top:-30px;padding:20px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
-.flight{background:#fff;border-left:5px solid #005DAA;padding:15px;margin:12px 0;border-radius:10px}
-button{background:#005DAA;color:white;border:none;padding:10px 14px;border-radius:8px}
-#langBox{padding:10px;border-radius:8px;border:none;width:280px}
-.loading{position:fixed;inset:0;background:white;display:none;justify-content:center;align-items:center;font-size:32px;font-weight:bold;z-index:9999}
+:root {
+  /* Exact pixel-matched color palette from your companion modules */
+  --site-bg: #02133e;
+  --card-bg: #001C42;
+  --input-bg: #00122C;
+  --accent: #00B2E2; /* United Cyan */
+  --border: #1A365D;
+  
+  --text-main: #FFFFFF;
+  --text-secondary: #A0B2C6;
+  --text-muted: #647B95;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { 
+  margin: 0; 
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+  background: var(--site-bg); 
+  color: var(--text-main);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+header { 
+  background: var(--card-bg); 
+  padding: 0 40px; 
+  height: 56px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  border-bottom: 1px solid var(--border);
+}
+
+header strong {
+  font-size: 15px; 
+  font-weight: 700; 
+  color: white; 
+  letter-spacing: -0.2px; 
+  text-transform: uppercase;
+}
+
+#langBox { 
+  width: 280px;
+  padding: 10px 14px;
+  border: 1px solid var(--border); 
+  background-color: var(--input-bg);
+  color: var(--text-main);
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#langBox:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(0, 178, 226, 0.4);
+}
+
+#langBox::placeholder {
+  color: var(--text-muted);
+}
+
+.hero { 
+  padding: 50px 24px; 
+  background: linear-gradient(135deg, var(--card-bg), #002e6b); 
+  border-bottom: 1px solid var(--border);
+}
+
+.hero h1 {
+  font-size: 26px; 
+  font-weight: 700; 
+  letter-spacing: -0.5px; 
+  text-transform: uppercase;
+}
+
+.container { max-width: 1100px; margin: auto; padding: 0 24px; }
+
+.card { 
+  background: var(--card-bg); 
+  margin-top: -30px; 
+  padding: 30px; 
+  border-radius: 2px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+  border-top: 6px solid var(--accent);
+}
+
+.card h2 {
+  font-size: 11px; 
+  font-weight: 700; 
+  letter-spacing: 1.5px; 
+  text-transform: uppercase; 
+  color: var(--accent); 
+  margin-bottom: 20px;
+}
+
+.flight { 
+  background: var(--input-bg); 
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--accent); 
+  padding: 20px; 
+  margin: 16px 0; 
+  border-radius: 4px;
+}
+
+.flight h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text-main);
+}
+
+.flight div {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+button { 
+  background: var(--accent); 
+  color: var(--card-bg); 
+  border: none; 
+  padding: 12px 24px; 
+  border-radius: 4px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--text-main);
+  color: var(--card-bg);
+}
+
+.loading { 
+  position: fixed; 
+  inset: 0; 
+  background: var(--site-bg); 
+  color: var(--text-main);
+  display: none; 
+  justify-content: center; 
+  align-items: center; 
+  font-size: 24px; 
+  font-weight: 700; 
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 9999; 
+}
 </style>
 </head>
 <body>
@@ -21,21 +166,21 @@ button{background:#005DAA;color:white;border:none;padding:10px 14px;border-radiu
 <div id="loading" class="loading">Loading Translation...</div>
 
 <header>
-<div><strong>UNITED AIRLINES</strong></div>
-<input id="langBox" placeholder="Type language to translate with AI">
+  <div><strong>United Airlines</strong></div>
+  <input id="langBox" placeholder="Type language to translate with AI">
 </header>
 
 <div class="hero">
-<div class="container">
-<h1 id="title"></h1>
-</div>
+  <div class="container">
+    <h1 id="title"></h1>
+  </div>
 </div>
 
 <div class="container">
-<div class="card">
-<h2 id="featured"></h2>
-<div id="flights"></div>
-</div>
+  <div class="card">
+    <h2 id="featured"></h2>
+    <div id="flights"></div>
+  </div>
 </div>
 
 <script>
@@ -67,7 +212,6 @@ function render(lang){
    <div>${f.route}</div>
    <div>${t.duration}: ${f.duration}</div>
    <div>${t.price}: ${f.price}</div>
-   <br>
    <button>${t.select}</button>
   </div>`;
  });
