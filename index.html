@@ -3,192 +3,160 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>United Business Travel Planner</title>
+<title>Business Travel Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Exact pixel-matched color palette from the companion modules */
-    --site-bg: #02133e;
-    --card-bg: #001C42;
-    --input-bg: #00122C;
-    --accent: #00B2E2; /* Vibrant winglet blue */
-    --border: #1A365D;
-    
-    --text-main: #FFFFFF;
-    --text-secondary: #A0B2C6;
-    --text-muted: #647B95;
+    --bg:       #0d1b2e;
+    --bg-card:  #112240;
+    --bg-input: #0a1628;
+    --border:   #1e3a5f;
+    --accent:   #38bdf8;
+    --accent2:  #0ea5e9;
+    --text:     #e2eaf4;
+    --text-sub: #7a9bbf;
+    --text-dim: #4a6a8a;
+    --green:    #34d399;
+    --green-bg: #0d2a1e;
+    --amber:    #fbbf24;
+    --amber-bg: #2a1e08;
+    --red:      #f87171;
   }
-  
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  
-  body { 
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-    background: var(--site-bg); 
-    color: var(--text-main); 
-    font-size: 14px; 
-    line-height: 1.5; 
-  }
+  html, body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; }
 
-  /* Header customized to blend seamlessly with the corporate dark aesthetic */
-  header { 
-    background: var(--card-bg); 
-    padding: 0 40px; 
-    height: 56px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    border-bottom: 1px solid var(--border);
-  }
-  .logo { display: flex; align-items: center; gap: 10px; }
-  .logo-mark { width: 28px; height: 28px; border: 1.5px solid var(--accent); border-radius: 50%; position: relative; overflow: hidden; }
-  .logo-mark::before { content:''; position:absolute; width:100%; height:1px; background:var(--accent); top:50%; }
-  .logo-mark::after  { content:''; position:absolute; height:100%; width:1px; background:var(--accent); left:50%; }
-  .logo-text { font-size: 15px; font-weight: 700; color: white; letter-spacing: -0.2px; text-transform: uppercase; }
-  .logo-text span { color: var(--accent); }
-  .header-label { font-size: 12px; color: var(--text-secondary); }
+  .page { max-width: 820px; margin: 0 auto; padding: 36px 24px 80px; }
 
-  .page { max-width: 800px; margin: 0 auto; padding: 40px 24px 80px; }
-  h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 8px; }
-  .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 32px; line-height: 1.5; }
+  h1 { font-size: 26px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text); margin-bottom: 8px; }
+  .subtitle { font-size: 13px; color: var(--text-sub); margin-bottom: 32px; line-height: 1.6; }
 
-  /* Section Containers matched to the previous panels */
-  .section { 
-    background: var(--card-bg); 
-    border: 1px solid var(--border); 
-    border-radius: 2px; /* Crisp, clean lines */
-    padding: 24px; 
-    margin-bottom: 16px; 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  }
-  .section-label { 
-    font-size: 11px; 
-    font-weight: 700; 
-    letter-spacing: 1.5px; 
-    text-transform: uppercase; 
-    color: var(--accent); 
-    margin-bottom: 16px; 
-  }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 16px; }
+  .card-label { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
 
-  /* Form inputs & textareas styled identically to your input box styles */
-  textarea { 
-    width: 100%; 
-    border: 1px solid var(--border); 
-    border-radius: 4px; 
-    padding: 14px; 
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-    font-size: 15px; 
-    color: var(--text-main); 
-    resize: vertical; 
-    min-height: 100px; 
-    background: var(--input-bg); 
-    line-height: 1.6; 
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  textarea {
+    width: 100%; background: var(--bg-input); border: 1px solid var(--border);
+    border-radius: 6px; padding: 12px 14px; color: var(--text);
+    font-family: 'Inter', sans-serif; font-size: 14px; resize: vertical; min-height: 100px; line-height: 1.6;
   }
-  textarea:focus { 
-    outline: none; 
-    border-color: var(--accent); 
-    box-shadow: 0 0 8px rgba(0, 178, 226, 0.4); 
-  }
-  textarea::placeholder { color: var(--text-muted); }
+  textarea:focus { outline: none; border-color: var(--accent2); }
+  textarea::placeholder { color: var(--text-dim); }
 
-  .route-row { display: grid; grid-template-columns: 1fr 24px 1fr; gap: 10px; align-items: center; margin-bottom: 12px; }
-  .route-arrow { text-align: center; color: var(--text-secondary); font-size: 16px; }
+  .route-row { display: grid; grid-template-columns: 1fr 28px 1fr; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .route-arrow { text-align: center; color: var(--text-sub); font-size: 16px; }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  
-  input[type=text] { 
-    width: 100%; 
-    border: 1px solid var(--border); 
-    border-radius: 4px; 
-    padding: 14px; 
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-    font-size: 15px; 
-    color: var(--text-main); 
-    background: var(--input-bg); 
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  input[type=text] {
+    width: 100%; background: var(--bg-input); border: 1px solid var(--border);
+    border-radius: 6px; padding: 10px 12px; color: var(--text);
+    font-family: 'Inter', sans-serif; font-size: 14px;
   }
-  input[type=text]:focus { 
-    outline: none; 
-    border-color: var(--accent); 
-    box-shadow: 0 0 8px rgba(0, 178, 226, 0.4); 
-  }
-  input::placeholder { color: var(--text-muted); }
+  input[type=text]:focus { outline: none; border-color: var(--accent2); }
+  input::placeholder { color: var(--text-dim); }
 
-  /* Custom Preference Toggle Elements */
   .toggles { display: flex; flex-wrap: wrap; gap: 8px; }
-  .toggle { 
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-    padding: 10px 14px; 
-    border: 1px solid var(--border); 
-    border-radius: 4px; 
-    cursor: pointer; 
-    user-select: none; 
-    background: var(--input-bg); 
-    font-size: 13px; 
-    color: var(--text-secondary);
-    transition: border-color 0.2s, background 0.2s, color 0.2s; 
+  .toggle {
+    display: flex; align-items: center; gap: 7px; padding: 7px 12px;
+    border: 1px solid var(--border); border-radius: 5px; cursor: pointer;
+    user-select: none; background: var(--bg-input); font-size: 13px; color: var(--text-sub);
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
   }
-  .toggle:hover { border-color: var(--accent); color: var(--text-main); }
-  .toggle.active { border-color: var(--accent); background: rgba(0, 178, 226, 0.1); color: var(--text-main); }
-  
-  .toggle-box { 
-    width: 16px; 
-    height: 16px; 
-    border: 1.5px solid var(--border); 
-    border-radius: 3px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    flex-shrink: 0; 
-    font-size: 11px; 
-    font-weight: bold;
+  .toggle:hover { border-color: var(--accent2); color: var(--text); }
+  .toggle.active { border-color: var(--accent); background: rgba(56,189,248,0.08); color: var(--accent); }
+  .toggle-box {
+    width: 15px; height: 15px; border: 1.5px solid var(--border); border-radius: 3px;
+    display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0;
   }
-  .toggle.active .toggle-box { background: var(--accent); border-color: var(--accent); color: var(--card-bg); }
-  .toggle-sub { font-size: 11px; color: var(--text-muted); margin-left: 2px; }
-  .toggle.active .toggle-sub { color: var(--accent); }
+  .toggle.active .toggle-box { background: var(--accent); border-color: var(--accent); color: #0d1b2e; }
+  .toggle-sub { font-size: 11px; color: var(--text-dim); margin-left: 2px; }
+  .toggle.active .toggle-sub { color: var(--accent2); }
 
-  /* Bottom Actions Grid */
   .go-row { display: flex; align-items: center; gap: 16px; margin-top: 20px; }
-  .go-btn { 
-    background: var(--accent); 
-    color: var(--card-bg); 
-    border: none; 
-    padding: 16px 36px; 
-    border-radius: 4px; 
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-    font-size: 14px; 
-    font-weight: 700; 
-    cursor: pointer; 
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: background-color 0.2s ease, color 0.2s ease;
+  .go-btn {
+    background: var(--accent); color: #0d1b2e; border: none; padding: 11px 32px;
+    border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700;
+    cursor: pointer; letter-spacing: 0.3px;
   }
-  .go-btn:hover { background: var(--text-main); color: var(--card-bg); }
-  .go-note { font-size: 12px; color: var(--text-secondary); }
+  .go-btn:hover { background: var(--accent2); }
+  .go-note { font-size: 12px; color: var(--text-dim); }
+
+  /* Loading */
+  #loading { display: none; margin-top: 20px; padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; }
+  .spinner { width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; vertical-align: middle; margin-right: 10px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-title { font-size: 14px; font-weight: 500; color: var(--text); vertical-align: middle; }
+  .steps { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 6px; padding-left: 4px; }
+  .step { font-size: 12px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; }
+  .step.active { color: var(--accent); }
+  .step.done   { color: var(--green); }
+  .step-icon   { width: 14px; text-align: center; }
+
+  /* Results */
+  #results { display: none; margin-top: 24px; }
+  .intro-bar { font-size: 13px; color: var(--text-sub); padding: 12px 14px; background: rgba(56,189,248,0.06); border-left: 3px solid var(--accent2); border-radius: 0 6px 6px 0; margin-bottom: 20px; line-height: 1.6; }
+
+  .flight-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 20px; }
+  @media (max-width: 660px) { .flight-grid { grid-template-columns: 1fr; } }
+
+  .fcard { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .fcard.risky    { border-top: 2px solid var(--amber); }
+  .fcard.balanced { border-top: 2px solid var(--accent); }
+  .fcard.safe     { border-top: 2px solid var(--green); }
+
+  .fcard-head { padding: 14px 16px 12px; border-bottom: 1px solid var(--border); }
+  .fcard-badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+  .risky    .fcard-badge { background: var(--amber-bg);  color: var(--amber); }
+  .balanced .fcard-badge { background: rgba(56,189,248,0.1); color: var(--accent); }
+  .safe     .fcard-badge { background: var(--green-bg);  color: var(--green); }
+  .fcard-num { font-size: 18px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; }
+  .fcard-aircraft { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+  .fcard-times { padding: 14px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border); }
+  .ftime-block { flex: 1; }
+  .ftime { font-size: 18px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; }
+  .fairport { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+  .fdur { text-align: center; font-size: 11px; color: var(--text-dim); }
+  .fdur-line { height: 1px; background: var(--border); width: 36px; margin: 3px auto; }
+
+  .fcard-facts { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; }
+  .fact { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; font-size: 12px; }
+  .fact-label { color: var(--text-sub); flex-shrink: 0; }
+  .fact-val { font-weight: 500; text-align: right; }
+  .fv-green { color: var(--green); }
+  .fv-amber { color: var(--amber); }
+  .fv-blue  { color: var(--accent); }
+  .risk-note { font-size: 11px; color: var(--amber); background: var(--amber-bg); padding: 6px 9px; border-radius: 5px; margin-top: 2px; line-height: 1.5; }
+
+  .fcard-foot { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .fcard-price { font-size: 16px; font-weight: 600; color: var(--text); }
+  .fcard-conf { font-size: 11px; color: var(--text-dim); }
+
+  .book-link { display: block; margin: 0 16px 14px; padding: 9px; text-align: center; border-radius: 5px; border: 1px solid; font-size: 13px; font-weight: 500; text-decoration: none; }
+  .risky    .book-link { border-color: var(--amber); color: var(--amber); }
+  .risky    .book-link:hover { background: var(--amber-bg); }
+  .balanced .book-link { border-color: var(--accent); color: var(--accent); }
+  .balanced .book-link:hover { background: rgba(56,189,248,0.08); }
+  .safe     .book-link { border-color: var(--green); color: var(--green); }
+  .safe     .book-link:hover { background: var(--green-bg); }
+
+  .reasoning { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px; }
+  .reasoning-label { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .reasoning p { font-size: 13px; color: var(--text-sub); line-height: 1.8; }
+  .reasoning strong { color: var(--text); font-weight: 500; }
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">
-    <div class="logo-mark"></div>
-    <span class="logo-text">United <span>AI</span></span>
-  </div>
-  <span class="header-label">Business Travel Planner · ORD / LGA / EWR</span>
-</header>
-
 <div class="page">
-  <h1>Business travel planner</h1>
+  <h1>Business Travel Planner</h1>
   <p class="subtitle">Describe your trip and we'll compare flights by TSA wait time, downtown transit, and on-time reliability — then suggest the three best options.</p>
 
-  <div class="section">
-    <div class="section-label">Journey description</div>
+  <div class="card">
+    <div class="card-label">Journey Description</div>
     <textarea id="journey-text" placeholder="e.g. I'm Joe G, flying LGA to ORD tomorrow morning for a 10am meeting in the Loop. Need to arrive by 9am.">I'm Joe G. I'm flying from LaGuardia to Chicago O'Hare tomorrow morning for a 9:30am client meeting in the Loop. I need to be downtown no later than 9am.</textarea>
   </div>
 
-  <div class="section">
-    <div class="section-label">Route & timing</div>
+  <div class="card">
+    <div class="card-label">Route &amp; Timing</div>
     <div class="route-row">
-      <input type="text" id="origin" placeholder="Origin airport (e.g. LGA)" value="LGA" />
+      <input type="text" id="origin" placeholder="Origin (e.g. LGA)" value="LGA" />
       <div class="route-arrow">→</div>
       <input type="text" id="destination" placeholder="Destination (e.g. ORD)" value="ORD" />
     </div>
@@ -198,8 +166,8 @@
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-label">Your services & preferences</div>
+  <div class="card">
+    <div class="card-label">Your Services &amp; Preferences</div>
     <div class="toggles">
       <label class="toggle active" onclick="toggleItem(this)"><div class="toggle-box">✓</div>TSA Precheck<span class="toggle-sub">Expedited</span></label>
       <label class="toggle" onclick="toggleItem(this)"><div class="toggle-box"></div>CLEAR<span class="toggle-sub">Biometric</span></label>
@@ -212,9 +180,22 @@
   </div>
 
   <div class="go-row">
-    <button class="go-btn" onclick="goToResults()">Find flights</button>
+    <button class="go-btn" onclick="runPlanner()">Find Flights</button>
     <span class="go-note">Compares TSA wait times, transit options, and on-time data</span>
   </div>
+
+  <div id="loading">
+    <span class="spinner"></span><span class="loading-title">Analyzing your journey…</span>
+    <ul class="steps">
+      <li class="step" id="s1"><span class="step-icon">·</span>Reading journey details</li>
+      <li class="step" id="s2"><span class="step-icon">·</span>Identifying flights</li>
+      <li class="step" id="s3"><span class="step-icon">·</span>Estimating TSA wait times</li>
+      <li class="step" id="s4"><span class="step-icon">·</span>Checking downtown transit</li>
+      <li class="step" id="s5"><span class="step-icon">·</span>Ranking by risk and buffer time</li>
+    </ul>
+  </div>
+
+  <div id="results"></div>
 </div>
 
 <script>
@@ -222,19 +203,124 @@ function toggleItem(el) {
   el.classList.toggle('active');
   el.querySelector('.toggle-box').textContent = el.classList.contains('active') ? '✓' : '';
 }
+function getToggles() {
+  return Array.from(document.querySelectorAll('.toggle.active')).map(t =>
+    t.childNodes[1]?.textContent?.trim() || '').filter(Boolean);
+}
 
-function goToResults() {
-  const params = new URLSearchParams({
-    journey:  document.getElementById('journey-text').value,
-    origin:   document.getElementById('origin').value,
-    dest:     document.getElementById('destination').value,
-    date:     document.getElementById('travel-date').value,
-    arrive:   document.getElementById('must-arrive').value,
-    // UPDATE THIS LINE BELOW:
-    toggles:  Array.from(document.querySelectorAll('.toggle.active')).map(t => t.innerText.replace('✓', '').trim()).filter(Boolean).join(',')
-  });
+const TRANSIT = {
+  ORD:'Blue Line → Loop: ~45 min', MDW:'Orange Line → Loop: ~30 min',
+  LGA:'AirTrain + subway: ~55 min', EWR:'NJ Transit → Penn: ~30 min',
+  JFK:'AirTrain + A train: ~60 min', SFO:'BART to Downtown: ~30 min',
+  LAX:'FlyAway Bus: ~45 min', BOS:'Silver Line: ~25 min', DCA:'Metro Blue Line: ~20 min',
+};
+function rn() { return Math.floor(Math.random()*8000)+1000; }
+function extractName(t) {
+  const m = t.match(/(?:i['']m|my name is|i am)\s+([A-Z][a-z]+(?:\s+[A-Z]\.?)?)/i);
+  return m ? m[1] : null;
+}
 
-  window.location.href = 'results.html?' + params.toString();
+function buildResults(origin, dest, toggles) {
+  const o = (origin||'LGA').toUpperCase().trim();
+  const d = (dest||'ORD').toUpperCase().trim();
+  const hasCLEAR    = toggles.some(t => t.includes('CLEAR'));
+  const hasPrecheck = toggles.some(t => t.includes('Precheck')||t.includes('TSA'));
+  const hasChair    = toggles.some(t => t.includes('Wheelchair'));
+  const tsaFast = hasCLEAR ? '3–5 min (CLEAR)' : hasPrecheck ? '7–10 min (PreCheck)' : '22–35 min';
+  const tsaMed  = hasCLEAR ? '3–5 min (CLEAR)' : hasPrecheck ? '8–14 min (PreCheck)' : '18–28 min';
+  const tsaC    = (hasCLEAR||hasPrecheck) ? 'fv-green' : 'fv-amber';
+  const transit = (TRANSIT[d]||'Transit to downtown: ~35 min') + (hasChair ? ' · Wheelchair assist at gate' : '');
+  const name = extractName(document.getElementById('journey-text').value) || 'Traveler';
+  const n1=rn(), n2=rn(), n3=rn();
+  return {
+    o, d, name, n2, transit,
+    secLabel: hasCLEAR ? 'CLEAR' : hasPrecheck ? 'PreCheck' : 'standard security',
+    transitShort: (TRANSIT[d]||'transit').split(':')[0],
+    flights: [
+      { type:'risky',    label:'Fastest / Riskiest', num:`UA ${n1}`, aircraft:'B737-800',   dep:'5:55 AM', arr:'7:31 AM', dur:'2h 36m', tsa:tsaFast, tsaC, transit, ot:'74%', otC:'fv-amber', buf:'~14 min', price:'$219', conf:58, note:'Very tight — any delay risks missing the meeting.' },
+      { type:'balanced', label:'Best Balance',        num:`UA ${n2}`, aircraft:'A320',       dep:'6:45 AM', arr:'8:22 AM', dur:'2h 37m', tsa:tsaMed,  tsaC, transit, ot:'88%', otC:'fv-green', buf:'~38 min', price:'$259', conf:84, note:null },
+      { type:'safe',     label:'Safest',              num:`UA ${n3}`, aircraft:'B737 MAX 9', dep:'5:10 AM', arr:'6:47 AM', dur:'2h 37m', tsa:tsaFast, tsaC, transit, ot:'91%', otC:'fv-green', buf:'~73 min', price:'$299', conf:95, note:null },
+    ]
+  };
+}
+
+function runPlanner() {
+  const origin  = document.getElementById('origin').value;
+  const dest    = document.getElementById('destination').value;
+  const toggles = getToggles();
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('results').innerHTML = '';
+  const loadEl = document.getElementById('loading');
+  loadEl.style.display = 'block';
+  const sids = ['s1','s2','s3','s4','s5'];
+  sids.forEach(s => { const e=document.getElementById(s); e.className='step'; e.querySelector('.step-icon').textContent='·'; });
+  let idx=0;
+  function advance() {
+    if (idx>0 && idx<=sids.length) { const p=document.getElementById(sids[idx-1]); p.className='step done'; p.querySelector('.step-icon').textContent='✓'; }
+    if (idx<sids.length) { document.getElementById(sids[idx]).className='step active'; idx++; }
+  }
+  advance();
+  const iv = setInterval(advance, 700);
+  setTimeout(() => {
+    clearInterval(iv);
+    sids.forEach(s => { const e=document.getElementById(s); e.className='step done'; e.querySelector('.step-icon').textContent='✓'; });
+    setTimeout(() => {
+      loadEl.style.display = 'none';
+      render(buildResults(origin, dest, toggles));
+    }, 300);
+  }, 3800);
+}
+
+function render(data) {
+  const arrive = document.getElementById('must-arrive').value;
+  const date   = document.getElementById('travel-date').value;
+  const cards = ['risky','balanced','safe'].map(type => {
+    const f = data.flights.find(x => x.type===type);
+    return `
+      <div class="fcard ${f.type}">
+        <div class="fcard-head">
+          <span class="fcard-badge">${f.label}</span>
+          <div class="fcard-num">${f.num}</div>
+          <div class="fcard-aircraft">${f.aircraft}</div>
+        </div>
+        <div class="fcard-times">
+          <div class="ftime-block"><div class="ftime">${f.dep}</div><div class="fairport">${data.o}</div></div>
+          <div class="fdur"><div>${f.dur}</div><div class="fdur-line"></div><div>nonstop</div></div>
+          <div class="ftime-block" style="text-align:right"><div class="ftime">${f.arr}</div><div class="fairport">${data.d}</div></div>
+        </div>
+        <div class="fcard-facts">
+          <div class="fact"><span class="fact-label">TSA wait</span><span class="fact-val ${f.tsaC}">${f.tsa}</span></div>
+          <div class="fact"><span class="fact-label">Downtown transit</span><span class="fact-val fv-blue" style="font-size:11px">${f.transit}</span></div>
+          <div class="fact"><span class="fact-label">On-time rate</span><span class="fact-val ${f.otC}">${f.ot}</span></div>
+          <div class="fact"><span class="fact-label">Buffer time</span><span class="fact-val">${f.buf}</span></div>
+          ${f.note ? `<div class="risk-note">${f.note}</div>` : ''}
+        </div>
+        <div class="fcard-foot">
+          <span class="fcard-price">${f.price}</span>
+          <span class="fcard-conf">AI confidence: ${f.conf}%</span>
+        </div>
+        <a class="book-link" href="https://www.united.com" target="_blank">Book on United →</a>
+      </div>`;
+  }).join('');
+
+  const el = document.getElementById('results');
+  el.innerHTML = `
+    <div class="intro-bar">
+      Showing three options for ${data.o} → ${data.d} on ${date}${arrive ? ', arriving by ' + arrive : ''}.
+      TSA estimates reflect your ${data.secLabel} access.
+    </div>
+    <div class="flight-grid">${cards}</div>
+    <div class="reasoning">
+      <div class="reasoning-label">AI Reasoning</div>
+      <p>Given ${data.name}'s${arrive ? ' hard ' + arrive + ' arrival constraint' : ' timing needs'} and ${data.secLabel},
+      the <strong>Best Balance (${data.flights.find(f=>f.type==='balanced').num})</strong> is the recommended choice —
+      it lands by 8:22 AM, leaving a 38-minute buffer to reach downtown via the ${data.transitShort} before the meeting.
+      The 5:55 AM departure is technically workable but its 74% on-time rate is a meaningful risk.
+      The 5:10 AM departure gives the most cushion but requires an early wake-up for relatively modest
+      additional benefit given the reliable 6:45 AM schedule.</p>
+    </div>`;
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 </script>
 </body>
